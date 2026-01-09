@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
-<title>咖波地科大冒險 V7 🍖</title>
+<title>咖波地科大冒險 🍖</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/naenon/open-huninn-font@1.1/font.css">
 <style>
 :root {
@@ -14,142 +14,139 @@
 }
 * { box-sizing: border-box; font-family: 'openhuninn', sans-serif; }
 body { margin: 0; padding: 15px; background-color: #e1f5fe; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: var(--text-brown); }
-.card { width: 100%; max-width: 480px; background: #fff; border: 5px solid var(--capoo-blue); border-radius: 40px; padding: 25px; box-shadow: 0px 10px 0px var(--capoo-dark); text-align: center; }
+.card { width: 100%; max-width: 480px; background: #fff; border: 5px solid var(--capoo-blue); border-radius: 40px; padding: 25px; box-shadow: 0px 10px 0px var(--capoo-dark); text-align: center; position: relative; }
 
-/* 讓咖波跟框框一樣寬 */
-.capoo-container { width: 100%; margin-bottom: 20px; overflow: hidden; border-radius: 20px; }
-.capoo-helper { width: 100%; display: block; height: auto; object-fit: cover; }
+/* 咖波 GIF 容器 */
+.capoo-helper { width: 120px; margin-bottom: 10px; }
 
 .chapter-btn { width: 100%; background: var(--capoo-blue); border: 3px solid var(--text-brown); padding: 15px; border-radius: 20px; margin-bottom: 12px; color: white; font-size: 17px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 0 var(--capoo-dark); font-weight: bold; }
 .progress-inner { height: 100%; background: var(--meat-pink); width: 0%; transition: 0.5s; }
-.word-text { font-size: 22px; margin: 15px 0; min-height: 70px; font-weight: bold; color: #333; display: flex; align-items: center; justify-content: center; }
-.meaning-text { font-size: 17px; color: white; background: var(--capoo-blue); padding: 15px; border-radius: 20px; border: 3px solid var(--text-brown); margin-bottom: 10px; font-weight: bold; }
-.sentence-box { background: #fff9c4; border: 2px dashed var(--meat-pink); padding: 12px; border-radius: 15px; font-size: 15px; text-align: left; margin-bottom: 15px; line-height: 1.6; }
-.btn-choice { width: 100%; background: white; border: 3px solid var(--capoo-blue); padding: 15px; border-radius: 18px; margin-top: 10px; cursor: pointer; font-weight: bold; font-size: 16px; box-shadow: 0 4px 0 var(--capoo-blue); }
-.btn-next { width: 100%; background: var(--meat-pink); color: white; border: 3px solid var(--text-brown); padding: 18px; border-radius: 25px; margin-top: 15px; font-size: 19px; font-weight: bold; box-shadow: 0 5px 0 #d87085; cursor: pointer; }
+.word-text { font-size: 22px; margin: 15px 0; min-height: 60px; font-weight: bold; color: #333; display: flex; align-items: center; justify-content: center; }
+.meaning-text { font-size: 17px; color: white; background: var(--capoo-blue); padding: 12px; border-radius: 20px; border: 3px solid var(--text-brown); margin-bottom: 10px; }
+.sentence-box { background: #fff9c4; border: 2px dashed var(--meat-pink); padding: 12px; border-radius: 15px; font-size: 14px; text-align: left; margin-bottom: 15px; line-height: 1.5; }
+.btn-choice { width: 100%; background: white; border: 3px solid var(--capoo-blue); padding: 12px; border-radius: 15px; margin-top: 8px; cursor: pointer; font-weight: bold; font-size: 15px; }
+.btn-next { width: 100%; background: var(--meat-pink); color: white; border: 3px solid var(--text-brown); padding: 16px; border-radius: 25px; margin-top: 15px; font-size: 18px; font-weight: bold; box-shadow: 0 5px 0 #d87085; cursor: pointer; }
 .choice-correct { background: #e3f2fd !important; border-color: #2196f3 !important; color: #2196f3; }
-.choice-wrong-show-correct { background: #ffebee !important; border-color: #ff5252 !important; color: #ff5252; animation: shake 0.3s; }
-@keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-5px);} 75% {transform: translateX(5px);} }
+.choice-wrong-show-correct { background: #ffebee !important; border-color: #ff5252 !important; color: #ff5252; }
 .hidden { display: none; }
 </style>
 </head>
 <body>
 <div class="card">
     <div id="home-screen">
-        <div class="capoo-container"><img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper"></div>
-        <h2 style="color:var(--capoo-dark); margin-bottom: 20px;">地科段考咖波特訓 V7 🍖</h2>
+        <img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper">
+        <h2 style="color:var(--capoo-dark); margin: 0 0 20px 0;">地科段考咖波特訓 🍖</h2>
         <div id="chapter-list"></div>
-        <button id="final-exam-btn" class="btn-next" style="background:#80cbc4; box-shadow:0 5px 0 #4db6ac;" onclick="startFinalExam()">大會考 (跨章節混合 25 題)</button>
-        <button onclick="resetProgress()" style="background:none; border:none; color:#bbb; text-decoration:underline; font-size:12px; margin-top:20px; cursor:pointer;">清空進度</button>
+        <button id="final-exam-btn" class="btn-next" style="background:#80cbc4; box-shadow:0 5px 0 #4db6ac;" onclick="startFinalExam()">大會考 (隨機 25 題)</button>
+        <button onclick="resetProgress()" style="background:none; border:none; color:#bbb; text-decoration:underline; font-size:12px; margin-top:20px; cursor:pointer;">重置學習紀錄</button>
     </div>
 
     <div id="study-screen" class="hidden">
-        <div class="capoo-container"><img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper"></div>
+        <img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper" style="width: 80px;">
         <div style="font-size:14px; font-weight:bold; color:var(--capoo-dark); margin-bottom:5px;">預習重點 (<span id="study-idx">0</span>/20)</div>
         <div style="width:100%; height:10px; background:#eee; border-radius:10px; overflow:hidden;"><div class="progress-inner" id="study-bar"></div></div>
         <div class="word-text" id="study-word"></div>
         <div class="meaning-text" id="study-mean"></div>
         <div class="sentence-box" id="study-note"></div>
-        <button class="btn-next" onclick="nextStudy()">下一口肉肉 (下一個重點)</button>
+        <button class="btn-next" onclick="nextStudy()">下一個重點 GO!</button>
     </div>
 
     <div id="quiz-screen" class="hidden">
-        <div class="capoo-container"><img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper"></div>
-        <div style="font-size:14px; font-weight:bold; color:var(--capoo-dark); margin-bottom:5px;">挑戰剩餘 <span id="quiz-remain">0</span> 題</div>
+        <img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper" style="width: 80px;">
+        <div style="font-size:14px; font-weight:bold; color:var(--capoo-dark); margin-bottom:5px;">測驗中 (剩餘 <span id="quiz-remain">0</span> 題)</div>
         <div style="width:100%; height:10px; background:#eee; border-radius:10px; overflow:hidden;"><div class="progress-inner" id="quiz-bar"></div></div>
         <div class="word-text" id="quiz-q"></div>
         <div id="choices-area"></div>
     </div>
 
     <div id="finish-screen" class="hidden">
-        <div class="capoo-container"><img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper"></div>
-        <h2 style="color:var(--capoo-dark)">等級提升！太強了！🍖</h2>
-        <p>這章的內容已經全部進入腦袋了！</p>
+        <img src="https://lunakuo1719.github.io/kapoo-test/kaaa.gif" class="capoo-helper">
+        <h2 style="color:var(--capoo-dark)">特訓完成！太棒了肉肉！🍖</h2>
+        <p>妳已經掌握這章的所有重點囉！</p>
         <button class="btn-next" onclick="goHome()">回主目錄</button>
     </div>
 </div>
 
 <script>
-// 題庫與邏輯保持最新版本...
 const courses = [
     {
         title: "7-1 宇宙與太陽系",
         data: [
-            {q:"天文單位 (AU) 的大小", a:"約 1.5 億公里", note:"定義：地球到太陽的平均距離。"},
-            {q:"光年 (ly) 的定義", a:"距離單位，光行進一年的距離", note:"1 光年約等於 10 兆公里，約為 1 萬個 AU。"},
-            {q:"太陽到海王星的距離", a:"約 30 AU", note:"太陽光傳到海王星約需要 4 小時。"},
-            {q:"銀河系的外觀", a:"俯視漩渦狀，側視圓盤狀", note:"側視中央凸起像荷包蛋，直徑約 10 萬光年。"},
-            {q:"恆星特徵", a:"自行發光發熱的天體", note:"例如太陽、北極星。發光原理是內部的核融合。"},
-            {q:"太陽系的誕生", a:"約 46 億年前", note:"由雲氣、塵埃受萬有引力收縮形成。"},
-            {q:"類地行星與類木行星界線", a:"火星與木星之間", note:"此區域佈滿了由岩石與金屬組成的小行星。"},
-            {q:"彗星的主成分", a:"冰雪與塵埃 (髒雪球)", note:"接近太陽受熱產生彗尾，指向背對太陽。"},
-            {q:"流星與隕石", a:"摩擦大氣生熱為流星，落地為隕石", note:"發光是與空氣摩擦產生的熱能所致。"},
-            {q:"宇宙起源理論", a:"大霹靂理論 (Big Bang)", note:"約 138 億年前發生。最初元素為氫與氦。"},
-            {q:"比鄰星", a:"離太陽最近的恆星", note:"距離地球約 4.2 光年。"},
-            {q:"北極星的高度", a:"等於觀察者的緯度", note:"在嘉義 (23.5°N) 看，北極星仰角就是 23.5 度。"},
-            {q:"類地行星特色", a:"密度大、體積小、衛星少", note:"組成：岩石與金屬。"},
-            {q:"類木行星特色", a:"密度小、體積大、衛星多", note:"組成：氣體與冰。都有行星環。"},
-            {q:"水的三態並存", a:"目前只在地球發現", note:"關鍵在於離太陽距離適中且大氣壓力適當。"},
-            {q:"小行星帶的位置", a:"火星與木星軌道間", note:"數以萬計不規則碎石塊聚集處。"},
-            {q:"哈伯定律的發現", a:"星系都在遠離我們", note:"表示宇宙正在膨脹。"},
-            {q:"矮行星範例", a:"冥王星、穀神星", note:"質量小，無法清除軌道上的其他小天體。"},
-            {q:"月球的天體分類", a:"衛星", note:"繞著地球公轉，本身不發光，反射太陽光。"},
-            {q:"太陽的質量佔比", a:"佔太陽系總質量 99.8%", note:"產生巨大引力控制八大行星。"}
+            {q:"光年 (ly)", a:"距離單位，光走一年的距離", note:"約為 10 兆公里。適用於恆星、星系間距離。"},
+            {q:"天文單位 (AU)", a:"地球到太陽的平均距離", note:"約為 1.5 億公里。適用於太陽系內行星間距離。"},
+            {q:"光年與 AU 的換算", a:"1 光年約等於 63,000 AU", note:"講義補充：光年約為天文單位的一萬倍(概數)。"},
+            {q:"銀河系的大小", a:"直徑約 10 萬光年", note:"由約兩千億顆恆星組成。"},
+            {q:"銀河系側視圖", a:"中央凸起的圓盤狀 (荷包蛋)", note:"太陽系位於盤面上。"},
+            {q:"比鄰星", a:"距離太陽最近的恆星", note:"距離約 4.2 光年。"},
+            {q:"北極星", a:"距離太陽約 400 光年", note:"我們看到的星光是 400 年前發出的。"},
+            {q:"太陽形成時間", a:"約 46 億年前", note:"與八大行星、矮行星幾乎同時期形成。"},
+            {q:"類地行星組成", a:"岩石、金屬", note:"水、金、地、火。密度大、體積小、衛星少。"},
+            {q:"類木行星組成", a:"氣體、冰 (氫與氦為主)", note:"木、土、天、海。密度小、體積大、衛星多、有行星環。"},
+            {q:"水三態並存", a:"目前僅在地球發現", note:"因為與太陽距離適中且有適當大氣壓力。"},
+            {q:"小行星帶位置", a:"火星與木星軌道之間", note:"主要由岩石與金屬組成。"},
+            {q:"彗星主成分", a:"冰雪、灰塵 (掃帚星)", note:"接近太陽時受熱產生彗尾，背對太陽。"},
+            {q:"流星發光原因", a:"與大氣摩擦生熱燃燒", note:"流星未燒完掉落地面稱為隕石。"},
+            {q:"宇宙大霹靂 (Big Bang)", a:"宇宙起源於極高溫高密的狀態", note:"最初形成的元素主要是氫與氦。"},
+            {q:"海王星距離", a:"約 30 AU", note:"太陽光傳到海王星約需 4 小時。"},
+            {q:"恆星定義", a:"能自行發光發熱的天體", note:"如太陽、北極星、天狼星。"},
+            {q:"矮行星代表", a:"冥王星、穀神星", note:"具圓球形但無法清除軌道天體。"},
+            {q:"月球是哪種天體？", a:"衛星", note:"繞著行星(地球)公轉。"},
+            {q:"哈伯定律", a:"星系都在遠離我們", note:"證明宇宙正在膨脹中。"}
         ]
     },
     {
         title: "7-2 晝夜與四季",
         data: [
-            {q:"地球自轉方向", a:"由西向東 (逆時鐘)", note:"造成天體東升西落與晝夜交替。"},
-            {q:"地軸傾斜角度", a:"23.5 度", note:"與公轉軌道垂直線的夾角。"},
-            {q:"四季產生的主因", a:"地軸傾斜 + 公轉", note:"導致一年中陽光直射點在南北回歸線間移動。"},
-            {q:"夏至 (6/22) 太陽直射", a:"北回歸線 (23.5°N)", note:"北半球晝長夜短，北極圈有永晝。"},
-            {q:"冬至 (12/22) 太陽直射", a:"南回歸線 (23.5°S)", note:"北半球晝短夜長，北極圈有永夜。"},
-            {q:"春秋分太陽直射", a:"赤道 (0°)", note:"全球晝夜等長，太陽正東升正西落。"},
-            {q:"季節溫度的關鍵", a:"太陽照射角度與時間", note:"直射時能量集中，斜射時能量分散。"},
-            {q:"夏至時嘉義影長", a:"最短", note:"正午仰角為 90 度，太陽就在頭頂上。"},
-            {q:"影子方向", a:"永遠與太陽方位相反", note:"如太陽在東偏南，影子就在西偏北。"},
-            {q:"極區永晝位置", a:"緯度大於 66.5 度", note:"夏季時太陽整天不落地平線。"},
-            {q:"南半球的季節", a:"與北半球恰好相反", note:"澳洲的 12 月是炎熱的夏天。"},
-            {q:"夏至太陽升落方位", a:"東偏北升起，西偏北落下", note:"太陽在空中的路徑最長。"},
-            {q:"冬至太陽升落方位", a:"東偏南升起，西偏南落下", note:"路徑最短，日照時間最少。"},
-            {q:"地球公轉週期", a:"約 365.25 日 (一年)", note:"繞太陽公轉一周。"},
-            {q:"夏季離太陽距離", a:"北半球夏天時地球其實較遠", note:"再次強調，四季與距離遠近無關。"},
-            {q:"北極星的位置變動", a:"不隨地球公轉而改變方位", note:"地軸恆指向北極星。"},
-            {q:"冬至時嘉義仰角", a:"43 度", note:"太陽最斜射，正午影長最長。"},
-            {q:"春分時太陽方位", a:"正東升起，正西落下", note:"此日晝夜平分。"},
-            {q:"晝夜長短變化最劇處", a:"兩極地區", note:"赤道地區一年四季晝夜幾乎各半。"},
-            {q:"太陽高度與能量", a:"仰角越高，單位面積受光量越多", note:"所以正午最熱。"}
+            {q:"地球自轉方向", a:"由西向東 (逆時鐘)", note:"造成天體東升西落。自轉一周為一日。"},
+            {q:"地軸傾斜角度", a:"23.5 度", note:"與公轉軌道面夾角 66.5 度。指向北極星。"},
+            {q:"四季成因", a:"地軸傾斜 23.5 度 ＋ 公轉", note:"導致一年中陽光直射位置改變。"},
+            {q:"夏至 (6/22) 直射", a:"北回歸線 (23.5°N)", note:"北半球晝長夜短，北極圈永晝。"},
+            {q:"冬至 (12/22) 直射", a:"南回歸線 (23.5°S)", note:"北半球晝短夜長，北極圈永夜。"},
+            {q:"春秋分直射", a:"赤道 (0°)", note:"全球晝夜等長。太陽正東升、正西落。"},
+            {q:"季節溫差主因", a:"照射角度 (能量密度) 與照射時間", note:"直射能量比斜射強。距離遠近並非主因。"},
+            {q:"嘉義夏至正午仰角", a:"90 度", note:"太陽直射頭頂。影長最短。"},
+            {q:"嘉義冬至正午仰角", a:"43 度", note:"計算：90 - (23.5 + 23.5)。影長最長。"},
+            {q:"北極星仰角", a:"等於觀測者當地的緯度", note:"在赤道高度為 0 度，北極點為 90 度。"},
+            {q:"影子方向", a:"與太陽方位相反", note:"早晨太陽在東方，影子就在西方。"},
+            {q:"南半球聖誕節 (12/25)", a:"正值夏季", note:"因為此時太陽直射南半球。"},
+            {q:"永晝與永夜", a:"發生在極圈 (66.5度) 以內", note:"是地軸傾斜與公轉的極端結果。"},
+            {q:"太陽在天空最高點", a:"正午時分 (中天)", note:"此時太陽位在觀察者的正南方。"},
+            {q:"夏至太陽升落方位", a:"東偏北升起，西偏北落下", note:"路徑長，照射時間最長。"},
+            {q:"冬至太陽升落方位", a:"東偏南升起，西偏南落下", note:"路徑短，照射時間最短。"},
+            {q:"公轉週期", a:"約 365.25 日 (一年)", note:"每四年潤年一次就是為了修正 0.25 天。"},
+            {q:"地軸指向變動", a:"公轉過程中地軸始終指向北極星", note:"指向不會改變。"},
+            {q:"不同緯度的影長", a:"緯度越高，正午太陽仰角越低", note:"影子長度也會越長。"},
+            {q:"極光現象", a:"主要在高緯度地區觀測", note:"與地球磁場及太陽粒子有關。"}
         ]
     },
     {
         title: "7-3 日地月與潮汐",
         data: [
-            {q:"潮汐每日延遲時間", a:"平均延遲 50 分鐘", note:"主因是月球在地球自轉時也在公轉。"},
-            {q:"大潮的發生日期", a:"農曆初一 (朔)、十五 (望)", note:"日、月、地排成一直線，潮差最大。"},
-            {q:"小潮的發生日期", a:"農曆初七、二十二 (弦月)", note:"日、地、月成 90 度，潮差最小。"},
-            {q:"潮汐的完整週期", a:"約 12 小時 25 分", note:"每天通常有兩次滿潮與兩次乾潮。"},
-            {q:"潮間帶觀察時機", a:"乾潮前後", note:"此時露出沙灘面積最大。"},
-            {q:"日食發生日期", a:"農曆初一 (朔)", note:"月球擋住太陽。"},
-            {q:"月食發生日期", a:"農曆十五 (望)", note:"月球進入地球陰影區。"},
-            {q:"月全食時的顏色", a:"深紅色 (紅月亮)", note:"太陽光經地球大氣折射紅光所致。"},
-            {q:"上弦月特色", a:"農曆初七八，亮右半邊", note:"黃昏時出現在南方天空。"},
-            {q:"下弦月特色", a:"農曆二十三，亮左半邊", note:"清晨時出現在南方天空。"},
-            {q:"月球永遠以同一面朝地", a:"自轉與公轉週期相同", note:"皆為 27.3 天。"},
-            {q:"潮差定義", a:"滿潮與乾潮的水位高度差", note:"大潮時高度差最明顯。"},
-            {q:"釣魚的最佳時機", a:"漲潮時", note:"魚群隨漲潮靠近岸邊覓食。"},
-            {q:"貨輪進港時機", a:"滿潮", note:"水位最深，可安全入港。"},
-            {q:"朔望月週期", a:"約 29.5 天", note:"月相變化的完整週期。"},
-            {q:"月亮升起方向", a:"每天都是從東方升起", note:"與太陽和星星的方向一致。"},
-            {q:"月亮每日延遲", a:"每天比前一天晚約 50 分鐘升起", note:"這與潮汐延遲原理相同。"},
-            {q:"日地月引力貢獻", a:"月球對潮汐的影響約為太陽 2 倍", note:"因為距離地球極近。"},
-            {q:"月亮不發光原因", a:"月亮是反射太陽光", note:"任何月相盈虧都是受光面的變化。"},
-            {q:"潮差最大的節氣", a:"與節氣無關，只與月相有關", note:"無論夏至或冬至，只要是朔望就有大潮。"}
+            {q:"潮汐週期 (精確值)", a:"約 12 小時 25 分鐘", note:"一天中通常有兩次滿潮兩次乾潮。"},
+            {q:"潮汐每日延遲", a:"平均延遲 50 分鐘", note:"因為月球繞地公轉，地球需多自轉約 12 度。"},
+            {q:"大潮 (朔、望)", a:"農曆初一、十五", note:"日、月、地排成一直線，潮差最大。"},
+            {q:"小潮 (上、下弦月)", a:"農曆初七、二二", note:"日、地、月成 90 度，潮差最小。"},
+            {q:"月相週期", a:"約 29.5 天 (朔望月)", note:"由初一到下一次初一的時間。"},
+            {q:"月球公轉與自轉", a:"週期相同 (約 27.3 天)", note:"結果：月球永遠以同一面朝向地球。"},
+            {q:"上弦月特色", a:"初七八，亮右邊 (西側)", note:"中午升起，半夜落下。"},
+            {q:"下弦月特色", a:"二二二三，亮左邊 (東側)", note:"半夜升起，中午落下。"},
+            {q:"日食發生日期", a:"農曆初一 (朔)", note:"月球在日地之間，遮住陽光。"},
+            {q:"月食發生日期", a:"農曆十五 (望)", note:"月球進入地球影子。"},
+            {q:"月全食顏色", a:"深紅色 (紅棕色)", note:"大氣折射紅光映射在月面上。"},
+            {q:"潮差定義", a:"滿潮與乾潮的水位高度差", note:"大潮時潮差最大。"},
+            {q:"觀察潮間帶時機", a:"乾潮前後", note:"此時水位最低，陸地出露最多。"},
+            {q:"貨輪進港時機", a:"滿潮", note:"水深最深，可避免擱淺。"},
+            {q:"潮間帶定義", a:"滿潮線與乾潮線之間的沿岸區域", note:"生物多樣性高。"},
+            {q:"日食與月食夾角", a:"黃道與白道有 5 度夾角", note:"所以並非每個月初一十五都會發生食。"},
+            {q:"滿潮 (High Tide)", a:"水位升到最高點時", note:"兩次滿潮間隔約半天。"},
+            {q:"乾潮 (Low Tide)", a:"水位降到最低點時", note:"適合挖蛤蜊或採集。"},
+            {q:"潮汐引力主導", a:"月球引力 (約為太陽的兩倍)", note:"雖然月球質量小，但距離非常近。"},
+            {q:"月亮升起方向", a:"永遠是東升西落", note:"因為地球是由西向東自轉。"}
         ]
     }
 ];
 
-let curCh = 0; let qQ = []; let done = JSON.parse(localStorage.getItem('capoo_v7')) || []; let ss = { ans: false, tot: 0, idx: 0 };
+let curCh = 0; let qQ = []; let done = JSON.parse(localStorage.getItem('capoo_v6')) || []; let ss = { ans: false, tot: 0, idx: 0 };
 function init() { renderHome(); }
 function renderHome() {
     const list = document.getElementById('chapter-list'); list.innerHTML = "";
@@ -172,14 +169,14 @@ function renderQ() {
             if(ss.ans) return; ss.ans=true;
             if(o.q===itm.q){ b.classList.add('choice-correct'); qQ.shift(); }
             else { Array.from(area.children).forEach(btn=>{if(btn.innerText===itm.a) btn.classList.add('choice-wrong-show-correct');}); qQ.push(qQ.shift()); }
-            setTimeout(renderQ, 1300);
+            setTimeout(renderQ, 1200);
         }; area.appendChild(b);
     });
 }
-function fin() { if(curCh>=0 && !done.includes(curCh)) { done.push(curCh); localStorage.setItem('capoo_v7', JSON.stringify(done)); } document.getElementById('quiz-screen').classList.add('hidden'); document.getElementById('finish-screen').classList.remove('hidden'); }
+function fin() { if(curCh>=0 && !done.includes(curCh)) { done.push(curCh); localStorage.setItem('capoo_v6', JSON.stringify(done)); } document.getElementById('quiz-screen').classList.add('hidden'); document.getElementById('finish-screen').classList.remove('hidden'); }
 function goHome() { document.getElementById('finish-screen').classList.add('hidden'); document.getElementById('home-screen').classList.remove('hidden'); renderHome(); }
 function startFinalExam() {
-    if(done.length<courses.length) return alert("要先把三章的內容都預習完喔！");
+    if(done.length<courses.length) return alert("要先把三章的肉肉都吃完喔！");
     curCh=-1; document.getElementById('home-screen').classList.add('hidden'); document.getElementById('quiz-screen').classList.remove('hidden');
     qQ=courses.flatMap(c=>c.data).sort(()=>Math.random()-0.5).slice(0,25); ss.tot=25; renderQ();
 }
